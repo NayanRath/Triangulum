@@ -48,4 +48,8 @@ public class TriangulumMain extends Activity {
         return out;
     }
 
+    public void sendTxt(List<String[]> txtData){
+        textSender tSend = new textSender();
+    }
+
 }
