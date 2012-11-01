@@ -6,11 +6,14 @@ import android.widget.TextView;
 import edu.macalester.modules.locationFetcher.locationFetcher;
 import edu.macalester.modules.triangulumModule;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 
 public class TriangulumMain extends Activity {
+
+    public HashMap<String, String> allMods;
     /**
      * Called when the activity is first created.
      */
@@ -26,9 +29,11 @@ public class TriangulumMain extends Activity {
         meh.setText(t);
     }
 
+
     public List<String> getModuleNames(){
-        List<String> mods= new LinkedList<String>();
-        mods.add("edu.macalester.modules.locationFetcher.locationFetcher");
+        List<String> mods;
+        setAllMods();
+        mods = (LinkedList<String>) allMods.values();
         return mods;
     }
 
@@ -52,4 +57,11 @@ public class TriangulumMain extends Activity {
         textSender tSend = new textSender();
     }
 
+
+    public void onTxtStart(String[] mods){}
+
+    public void setAllMods(){
+        allMods = new HashMap<String, String>();
+        allMods.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
+    }
 }

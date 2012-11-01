@@ -29,6 +29,5 @@ public class textSender {
         String msg = mkTxt(modTxt);
         SmsManager smsMan = SmsManager.getDefault();
         smsMan.sendTextMessage(destNumber,null,msg,null,null);
-
     }
 }
