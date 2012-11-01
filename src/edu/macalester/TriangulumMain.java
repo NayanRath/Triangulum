@@ -31,9 +31,11 @@ public class TriangulumMain extends Activity {
 
 
     public List<String> getModuleNames(){
-        List<String> mods;
+        List<String> mods=new LinkedList<String>();
         setAllMods();
-        mods = (LinkedList<String>) allMods.values();
+        for(String val : allMods.values()){
+            mods.add(val);
+        }
         return mods;
     }
 
@@ -53,15 +55,17 @@ public class TriangulumMain extends Activity {
         return out;
     }
 
-    public void sendTxt(List<String[]> txtData){
+    public void sendTxt(String dest, List<String[]> txtData){
         textSender tSend = new textSender();
+        tSend.sendTxt(txtData,dest);
     }
 
 
-    public void onTxtStart(String[] mods){}
+    public void onTxtStart(String[] txt){}
 
     public void setAllMods(){
         allMods = new HashMap<String, String>();
         allMods.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
+        //allMods.put("alert","edu.macalester.modules.alert.alert");
     }
 }
