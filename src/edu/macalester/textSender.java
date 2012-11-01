@@ -12,7 +12,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 /*
- * this is a comment to test if Kyle can commit
+ * this is a comment to test if Mike can commit
 */
 public class textSender {
 
