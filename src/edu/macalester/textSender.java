@@ -1,5 +1,7 @@
 package edu.macalester;
 
+import android.telephony.SmsManager;
+
 import java.util.List;
 
 /**
@@ -22,6 +24,8 @@ public class textSender {
 
     public void sendTxt(List<String[]> modTxt, String destNumber){
         String msg = mkTxt(modTxt);
-        //TODO: send txt message here
+        SmsManager smsMan = SmsManager.getDefault();
+        smsMan.sendTextMessage(destNumber,null,msg,null,null);
+
     }
 }
