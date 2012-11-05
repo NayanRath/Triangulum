@@ -38,7 +38,7 @@ public class textParser extends BroadcastReceiver {
                 if (c != null){
                     String frm=msgs[i].getOriginatingAddress();
                     tMain = new TriangulumMain();
-                    tMain.onTxtStart(c);
+                    tMain.onTxtStart(c, frm);
                     tMain=null;
                 }
             }

@@ -23,7 +23,7 @@ public class TriangulumMain extends Activity {
         setAllMods();
         setContentView(R.layout.main);
         view = (TextView) findViewById(R.id.meh);
-        onTxtStart(new String[0]);
+        onTxtStart(new String[0], "8675309");
 /*        List<String[]> txts=runModules(getAllModuleNames());
         String t= txts.get(0)[1];
 
@@ -60,7 +60,7 @@ public class TriangulumMain extends Activity {
     }
 
 
-    public void onTxtStart(String[] txt){
+    public void onTxtStart(String[] txt, String frm){
         List<String> modnames=new LinkedList<String>();
         for (String s : txt){
             if (allMods.keySet().contains(s)){
