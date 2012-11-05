@@ -26,7 +26,7 @@ public class TriangulumMain extends Activity {
         //onTxtStart(new String[0], "8675309");
         //To run individual module:
         String[] tst = {"menu"};
-        onTxtStart(tst, "8675309");
+        onTxtStart(tst, "18675309");
     }
 
     public List<String> getAllModuleNames(){
