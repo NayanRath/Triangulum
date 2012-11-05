@@ -23,11 +23,10 @@ public class TriangulumMain extends Activity {
         setAllMods();
         setContentView(R.layout.main);
         view = (TextView) findViewById(R.id.meh);
-        onTxtStart(new String[0], "8675309");
-/*        List<String[]> txts=runModules(getAllModuleNames());
-        String t= txts.get(0)[1];
-
-        view.setText(t);*/
+        //onTxtStart(new String[0], "8675309");
+        //To run individual module:
+        String[] tst = {"menu"};
+        onTxtStart(tst, "8675309");
     }
 
     public List<String> getAllModuleNames(){
@@ -38,12 +37,12 @@ public class TriangulumMain extends Activity {
         return mods;
     }
 
-    public List<String[]> runModules(List<String> modnames){
+    public List<String[]> runModules(HashMap<String,String> mods){
         String txt;
         List<String[]> out= new LinkedList<String[]>();
-        for(String modname : modnames){
+        for(String modname : mods.keySet()){
             try{
-                triangulumModule mod = (triangulumModule) Class.forName(allMods.get(modname)).newInstance();
+                triangulumModule mod = (triangulumModule) Class.forName(allMods.get(mods.get(modname))).newInstance();
                 mod.setContext(this);
                 txt = mod.getTxt();
             } catch (Exception e){
@@ -61,14 +60,14 @@ public class TriangulumMain extends Activity {
 
 
     public void onTxtStart(String[] txt, String frm){
-        List<String> modnames=new LinkedList<String>();
+        HashMap<String, String> modnames=new HashMap<String,String>();
         for (String s : txt){
             if (allMods.keySet().contains(s)){
-                modnames.add(s);
+                modnames.put(s,allMods.get(s));
             }
         }
         if (modnames.isEmpty()){
-            modnames.add("menu");
+            modnames.put("menu",allMods.get("menu"));
         }
 
         List<String[]> txts = runModules(modnames);
