@@ -23,10 +23,11 @@ public class TriangulumMain extends Activity {
         setAllMods();
         setContentView(R.layout.main);
         view = (TextView) findViewById(R.id.meh);
-        //onTxtStart(new String[0], "8675309");
-        //To run individual module:
-        String[] tst = {"menu"};
-        onTxtStart(tst, "18675309");
+        onTxtStart(new String[0]);
+/*        List<String[]> txts=runModules(getAllModuleNames());
+        String t= txts.get(0)[1];
+
+        view.setText(t);*/
     }
 
     public List<String> getAllModuleNames(){
@@ -37,12 +38,12 @@ public class TriangulumMain extends Activity {
         return mods;
     }
 
-    public List<String[]> runModules(HashMap<String,String> mods){
+    public List<String[]> runModules(List<String> modnames){
         String txt;
         List<String[]> out= new LinkedList<String[]>();
-        for(String modname : mods.keySet()){
+        for(String modname : modnames){
             try{
-                triangulumModule mod = (triangulumModule) Class.forName(allMods.get(mods.get(modname))).newInstance();
+                triangulumModule mod = (triangulumModule) Class.forName(allMods.get(modname)).newInstance();
                 mod.setContext(this);
                 txt = mod.getTxt();
             } catch (Exception e){
@@ -59,15 +60,15 @@ public class TriangulumMain extends Activity {
     }
 
 
-    public void onTxtStart(String[] txt, String frm){
-        HashMap<String, String> modnames=new HashMap<String,String>();
+    public void onTxtStart(String[] txt){
+        List<String> modnames=new LinkedList<String>();
         for (String s : txt){
             if (allMods.keySet().contains(s)){
-                modnames.put(s,allMods.get(s));
+                modnames.add(s);
             }
         }
         if (modnames.isEmpty()){
-            modnames.put("menu",allMods.get("menu"));
+            modnames.add("menu");
         }
 
         List<String[]> txts = runModules(modnames);
@@ -80,6 +81,7 @@ public class TriangulumMain extends Activity {
         allMods = new HashMap<String, String>();
         allMods.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
         allMods.put("menu","edu.macalester.modules.menu.menu");
+        allMods.put("lock","edu.macalester.modules.lock.lock");
         //allMods.put("alert","edu.macalester.modules.alert.alert");
     }
 
@@ -87,6 +89,7 @@ public class TriangulumMain extends Activity {
         HashMap<String, String> modMap = new HashMap<String, String>();
         modMap.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
         modMap.put("menu","edu.macalester.modules.menu.menu");
+        modMap.put("lock","edu.macalester.modules.lock.lock");
         return modMap;
     }
 }

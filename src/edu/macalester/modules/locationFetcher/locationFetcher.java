@@ -1,6 +1,5 @@
 package edu.macalester.modules.locationFetcher;
 
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -23,22 +22,22 @@ public class locationFetcher extends triangulumModule implements LocationListene
 //*
         lmgr = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);
 
-        lmgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10*1000, 1000, this );
-        lmgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,90*1000, 1000, this);
-        Criteria crit=new Criteria();
-        String best=lmgr.getBestProvider(crit, true);
+//        lmgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10*1000, 1000, this );
+//        lmgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,90*1000, 1000, this);
+//        Criteria crit=new Criteria();
+//        String best=lmgr.getBestProvider(crit, true);
+//        String loctxt;
+//        if (best == null){
+//            loctxt = "???";
+//        } else {
+//            Location loc = lmgr.getLastKnownLocation(best);
+//            Double lat = loc.getLatitude();
+//            Double lon = loc.getLongitude();
+//            Double alt = loc.getAltitude();
+//            loctxt= lat.toString()+", "+lon.toString()+", "+alt.toString();
+//        }//*/
         String loctxt;
-        if (best == null){
-            loctxt = "???";
-        } else {
-            Location loc = lmgr.getLastKnownLocation(best);
-            Double lat = loc.getLatitude();
-            Double lon = loc.getLongitude();
-            Double alt = loc.getAltitude();
-            loctxt= lat.toString()+", "+lon.toString()+", "+alt.toString();
-        }//*/
-        //String loctxt;
-        //loctxt="whoop whoop!";
+        loctxt="whoop whoop!";
 
 
         return loctxt;
