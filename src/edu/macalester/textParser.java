@@ -40,13 +40,16 @@ public class textParser extends BroadcastReceiver {
 
                     String frm=msgs[i].getOriginatingAddress();
 
-                    tMain = new TriangulumMain();
+                    //tMain = new TriangulumMain();
 
                     //tMain.onTxtStart(c, frm);
 
 
                     Intent broadcastIntent = new Intent();
                     broadcastIntent.setAction("SMS_RECEIVED_ACTION");
+                    broadcastIntent.putExtra("txtWords",c);
+                    broadcastIntent.putExtra("from",frm);
+                    context.sendBroadcast(broadcastIntent);
                     //tMain.onTxtStart(c);
                     Toast.makeText(context, frm, Toast.LENGTH_SHORT).show();
                     //tMain=null;

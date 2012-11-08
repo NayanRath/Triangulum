@@ -1,6 +1,10 @@
 package edu.macalester;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.widget.TextView;
 import edu.macalester.modules.triangulumModule;
@@ -14,12 +18,23 @@ public class TriangulumMain extends Activity {
 
     public TextView view;
     public HashMap<String, String> allMods;
+    IntentFilter intentFilter;
+    private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            onTxtStart((String[]) intent.getExtras().get("txtWords"));
+        }
+    };
+
     /**
      * Called when the activity is first created.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        intentFilter=new IntentFilter();
+        intentFilter.addAction("SMS_RECEIVED_ACTION");
+        registerReceiver(intentReceiver,intentFilter);
         setAllMods();
         setContentView(R.layout.main);
         view = (TextView) findViewById(R.id.meh);
@@ -63,11 +78,11 @@ public class TriangulumMain extends Activity {
 
     public void onTxtStart(String[] txt){
         List<String> modnames=new LinkedList<String>();
-//        for (String s : txt){
-            //if (allMods.keySet().contains(s)){
-            //    modnames.add(s);
-            //}
-//        }
+        for (String s : txt){
+            if (allMods.keySet().contains(s)){
+                modnames.add(s);
+            }
+        }
         if (modnames.isEmpty()){
             modnames.add("menu");
         }
