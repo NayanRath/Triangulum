@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
-import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -51,7 +50,7 @@ public class textParser extends BroadcastReceiver {
                     broadcastIntent.putExtra("from",frm);
                     context.sendBroadcast(broadcastIntent);
                     //tMain.onTxtStart(c);
-                    Toast.makeText(context, frm, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, frm, Toast.LENGTH_SHORT).show();
                     //tMain=null;
                 }
             }
