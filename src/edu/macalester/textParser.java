@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -32,24 +33,33 @@ public class textParser extends BroadcastReceiver {
         if (bun != null){
             Object[] pdus = (Object[]) bun.get("pdus");
             msgs = new SmsMessage[pdus.length];
-            for (int i=0; i<msgs.length;i++){
+            for (int i=0; i<msgs.length; i++){
                 msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
                 String[] c = testAndSplitString(msgs[i].getMessageBody());
-                if (c != null){
+                if (c!=null){
+
                     String frm=msgs[i].getOriginatingAddress();
+
                     tMain = new TriangulumMain();
+
                     //tMain.onTxtStart(c, frm);
-                    tMain.onTxtStart(c);
-                    tMain=null;
+
+
+                    Intent broadcastIntent = new Intent();
+                    broadcastIntent.setAction("SMS_RECEIVED_ACTION");
+                    //tMain.onTxtStart(c);
+                    Toast.makeText(context, frm, Toast.LENGTH_SHORT).show();
+                    //tMain=null;
                 }
             }
         }
     }
 
     public String[] testAndSplitString(String c){
-        String s[] = c.split(" ");
-        if (s[0] == getActivationCode()){
-            return Arrays.copyOfRange(s,1,s.length);
+        String s[] = c.split("\\s+");
+        //return s;
+        if (s[0].equals(getActivationCode())){
+            return Arrays.copyOfRange(s, 1, s.length);
         }
         return null;
     }
