@@ -22,7 +22,7 @@ public class TriangulumMain extends Activity {
     private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            onTxtStart((String[]) intent.getExtras().get("txtWords"));
+            onTxtStart((String[]) intent.getExtras().get("txtWords"),(String) intent.getExtras().get("from"));
         }
     };
 
@@ -38,7 +38,7 @@ public class TriangulumMain extends Activity {
         setAllMods();
         setContentView(R.layout.main);
         view = (TextView) findViewById(R.id.meh);
-        onTxtStart(new String[0]);
+        onTxtStart(new String[0],"");
         textParser tP = new textParser();
 /*        List<String[]> txts=runModules(getAllModuleNames());
         String t= txts.get(0)[1];
@@ -76,7 +76,7 @@ public class TriangulumMain extends Activity {
     }
 
 
-    public void onTxtStart(String[] txt){
+    public void onTxtStart(String[] txt, String frm){
         List<String> modnames=new LinkedList<String>();
         for (String s : txt){
             if (allMods.keySet().contains(s)){
@@ -91,6 +91,11 @@ public class TriangulumMain extends Activity {
         String t= txts.get(0)[1];
 
         view.setText(t);
+        if (!frm.isEmpty()){
+            textSender ts = new textSender();
+            ts.sendTxt(t,frm);
+            ts = null;
+        }
     }
 
     public void setAllMods(){
@@ -98,7 +103,7 @@ public class TriangulumMain extends Activity {
         allMods.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
         allMods.put("menu","edu.macalester.modules.menu.menu");
         allMods.put("lock","edu.macalester.modules.lock.lock");
-        //allMods.put("alert","edu.macalester.modules.alert.alert");
+        allMods.put("alert","edu.macalester.modules.alert.alert");
     }
 
     public static HashMap<String, String> getAllMods(){
@@ -106,6 +111,7 @@ public class TriangulumMain extends Activity {
         modMap.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
         modMap.put("menu","edu.macalester.modules.menu.menu");
         modMap.put("lock","edu.macalester.modules.lock.lock");
+        modMap.put("alert","edu.macalester.modules.alert.alert");
         return modMap;
     }
 }

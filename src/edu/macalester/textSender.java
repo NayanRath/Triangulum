@@ -30,4 +30,9 @@ public class textSender {
         SmsManager smsMan = SmsManager.getDefault();
         smsMan.sendTextMessage(destNumber,null,msg,null,null);
     }
+
+    public void sendTxt(String msg, String dest){
+        SmsManager smsMan = SmsManager.getDefault();
+        smsMan.sendTextMessage(dest,null,msg,null,null);
+    }
 }
