@@ -12,7 +12,7 @@ public class alert extends triangulumModule{
         //pool.play(sound, 1.0f, 1.0f, 0, 0, 1.0f);
 
 
-        MediaPlayer mp = MediaPlayer.create(context, R.raw.alert);
+        MediaPlayer mp = MediaPlayer.create(context, R.raw.alertsound);
         mp.start();
         /*try{
             //File mFile = new File("src/edu/macalester/modules/alert/trousers.mp3");
