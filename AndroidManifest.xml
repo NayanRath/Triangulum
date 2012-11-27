@@ -12,6 +12,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".Prefs"
+            android:label="@string/settings_title">
+        </activity>
         <receiver android:name=".textParser">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>

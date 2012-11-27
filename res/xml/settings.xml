@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        androidLkey="location"
+        android:title="Locate Phone"
+        android:summary="sends a text with where the phone is located"
+        android:defaultValue="true" />
+    <CheckBoxPreference
+        androidLkey="alert"
+        android:title="Play Alert Sounds"
+        android:summary="plays an alert sound on the lost phone"
+        android:defaultValue="true" />    
+</PreferenceScreen>

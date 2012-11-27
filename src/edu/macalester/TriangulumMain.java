@@ -13,6 +13,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 
 public class TriangulumMain extends Activity {
 
@@ -26,6 +30,30 @@ public class TriangulumMain extends Activity {
         }
     };
 
+    /**
+     * Override Menu Options
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	super.onCreateOptionsMenu(menu);
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.menu, menu);
+    	return true;
+    }
+    
+    /**
+     * Override Menu Item Selected method
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	switch (item.getItemId()) {
+    	case R.id.settings:
+    		startActivity(new Intent(this, Prefs.class));
+    		return true;
+    	}
+    	return false;
+    }
+    
     /**
      * Called when the activity is first created.
      */
