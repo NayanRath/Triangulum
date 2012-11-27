@@ -1,5 +1,7 @@
 package edu.macalester.modules.alert;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import edu.macalester.R;
 import edu.macalester.modules.triangulumModule;
@@ -14,6 +16,9 @@ public class alert extends triangulumModule{
 
         MediaPlayer mp = MediaPlayer.create(context, R.raw.alertsound);
         mp.start();
+        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+        audioManager.setStreamVolume(AudioManager.STREAM_RING,audioManager.getStreamMaxVolume(AudioManager.STREAM_RING),AudioManager.FLAG_SHOW_UI);
         /*try{
             //File mFile = new File("src/edu/test.edu.macalester/modules/alert/trousers.mp3");
             //FileInputStream fs = new FileInputStream(mFile);
