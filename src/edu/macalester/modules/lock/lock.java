@@ -33,7 +33,7 @@ public class lock extends triangulumModule {
             newPass+=validCharacters[rand.nextInt(validCharacters.length)];
         }
 
-        //Note: uncomment the following line for hardcoded newPass
+        ///Note: uncomment the following line for hardcoded newPass
         //newPass="asdf";
 
         manager.resetPassword(newPass, 0);
