@@ -1,26 +1,21 @@
 package edu.macalester;
 
-import android.app.Activity;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Bundle;
-import android.widget.TextView;
+import android.os.IBinder;
 import edu.macalester.modules.triangulumModule;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
+public class TriangulumMain extends Service {
 
-public class TriangulumMain extends Activity {
-
-    public TextView view;
+   // public TextView view;
     public HashMap<String, String> allMods;
     IntentFilter intentFilter;
     private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
@@ -30,48 +25,21 @@ public class TriangulumMain extends Activity {
         }
     };
 
-    /**
-     * Override Menu Options
-     */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	super.onCreateOptionsMenu(menu);
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.menu, menu);
-    	return true;
-    }
-    
-    /**
-     * Override Menu Item Selected method
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	switch (item.getItemId()) {
-    	case R.id.settings:
-    		startActivity(new Intent(this, Prefs.class));
-    		return true;
-    	}
-    	return false;
+    public IBinder onBind(final Intent intent) {
+        return null;
     }
     
     /**
      * Called when the activity is first created.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate() {
+        super.onCreate();
         intentFilter=new IntentFilter();
         intentFilter.addAction("SMS_RECEIVED_ACTION");
         registerReceiver(intentReceiver,intentFilter);
         setAllMods();
-        setContentView(R.layout.main);
-        view = (TextView) findViewById(R.id.meh);
-        onTxtStart(new String[0],"");
-        textParser tP = new textParser();
-/*        List<String[]> txts=runModules(getAllModuleNames());
-        String t= txts.get(0)[1];
-
-        view.setText(t);*/
     }
 
     public List<String> getAllModuleNames(){
@@ -118,7 +86,7 @@ public class TriangulumMain extends Activity {
         List<String[]> txts = runModules(modnames);
         String t= txts.get(0)[1];
 
-        view.setText(t);
+//        view.setText(t);
         if (!frm.isEmpty()){
             textSender ts = new textSender();
             ts.sendTxt(t,frm);
