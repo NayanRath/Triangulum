@@ -106,6 +106,7 @@ public class TriangulumMain extends Service {
         modMap.put("menu","edu.macalester.modules.menu.menu");
         modMap.put("lock","edu.macalester.modules.lock.lock");
         modMap.put("alert","edu.macalester.modules.alert.alert");
+        modMap.put("find","edu.macalester.modules.find.find");
         return modMap;
     }
 }
