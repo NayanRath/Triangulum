@@ -73,6 +73,7 @@ public class TriangulumMain extends Service {
 
 
     public void onTxtStart(String[] txt, String frm){
+        setAllMods();
         List<String> modnames=new LinkedList<String>();
         for (String s : txt){
             if (allMods.keySet().contains(s)){
@@ -95,14 +96,11 @@ public class TriangulumMain extends Service {
     }
 
     public void setAllMods(){
-        allMods = new HashMap<String, String>();
-        allMods.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
-        allMods.put("menu","edu.macalester.modules.menu.menu");
-        allMods.put("lock","edu.macalester.modules.lock.lock");
-        allMods.put("alert","edu.macalester.modules.alert.alert");
+        allMods=getAllMods();
     }
 
     public static HashMap<String, String> getAllMods(){
+        //TODO: fetch from database?
         HashMap<String, String> modMap = new HashMap<String, String>();
         modMap.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
         modMap.put("menu","edu.macalester.modules.menu.menu");
