@@ -31,11 +31,15 @@ public class locationFetcher extends triangulumModule implements LocationListene
         if (best == null){
             loctxt = "???";
         } else {
-            Location loc = lmgr.getLastKnownLocation(best);
-            Double lat = loc.getLatitude();
-            Double lon = loc.getLongitude();
-            Double alt = loc.getAltitude();
-            loctxt= lat.toString()+", "+lon.toString();
+            try{
+                Location loc = lmgr.getLastKnownLocation(best);
+                Double lat = loc.getLatitude();
+                Double lon = loc.getLongitude();
+                Double alt = loc.getAltitude();
+                loctxt= lat.toString()+", "+lon.toString();
+            } catch (Exception e){
+                loctxt="unable to locate";
+            }
         }//*/
         //String loctxt;
         //loctxt="whoop whoop!";
