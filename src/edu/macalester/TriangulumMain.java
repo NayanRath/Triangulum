@@ -108,9 +108,9 @@ public class TriangulumMain extends Service {
     	settings = getSharedPreferences("SharedPrefs", 0);
     	List<String> enablers = new LinkedList<String>();
     	
-    	boolean bLocation = settings.getBoolean("location", true);
-        boolean bAlert = settings.getBoolean("alert", true);
-        boolean bLock = settings.getBoolean("lock", true);
+    	boolean bLocation = settings.getBoolean("PrefBool1", true);
+        boolean bAlert = settings.getBoolean("PrefBool2", true);
+        boolean bLock = settings.getBoolean("PrefBool3", true);
         
         if (bLocation) enablers.add("location");
         if (bAlert) enablers.add("alert");
