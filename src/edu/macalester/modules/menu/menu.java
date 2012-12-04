@@ -13,10 +13,12 @@ import edu.macalester.modules.triangulumModule;
 public class menu extends triangulumModule {
 
     public String getTxt(){
-        String txt="";
+        String txt="hello";
+        /*
         for (String s : TriangulumMain.getAllMods().keySet()){
             txt =txt + s + " ";
         }
+        */
         return txt;
     }
 }

@@ -5,15 +5,22 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.util.Log;
+import android.widget.Toast;
 import edu.macalester.modules.triangulumModule;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 public class TriangulumMain extends Service {
+    public static SharedPreferences settings;
+	private SharedPreferences sharedPreferences;
 
    // public TextView view;
     public HashMap<String, String> allMods;
@@ -73,7 +80,8 @@ public class TriangulumMain extends Service {
 
 
     public void onTxtStart(String[] txt, String frm){
-        setAllMods();
+        Log.d("hello", "world");
+    	setAllMods();
         List<String> modnames=new LinkedList<String>();
         for (String s : txt){
             if (allMods.keySet().contains(s)){
@@ -96,16 +104,35 @@ public class TriangulumMain extends Service {
     }
 
     public void setAllMods(){
-        allMods=getAllMods();
+    	Toast.makeText(this, "It was seen.", Toast.LENGTH_SHORT).show();
+    	settings = getSharedPreferences("SharedPrefs", 0);
+    	List<String> enablers = new LinkedList<String>();
+    	
+    	boolean bLocation = settings.getBoolean("location", true);
+        boolean bAlert = settings.getBoolean("alert", true);
+        boolean bLock = settings.getBoolean("lock", true);
+        
+        if (bLocation) enablers.add("location");
+        if (bAlert) enablers.add("alert");
+        if (bLock) enablers.add("lock");
+    	allMods=getAllMods(enablers);
+
     }
 
-    public static HashMap<String, String> getAllMods(){
+    public static HashMap<String, String> getAllMods(List<String> enablers){
         //TODO: fetch from database?
         HashMap<String, String> modMap = new HashMap<String, String>();
-        modMap.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
+        if (enablers.contains("location")) {
+        	modMap.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
+        }
+        if (enablers.contains("lock")) {
+            modMap.put("lock","edu.macalester.modules.lock.lock");       
+        }
+        if (enablers.contains("lock")) {
+            modMap.put("alert","edu.macalester.modules.alert.alert");       
+        }
+        modMap.put("menu","edu.macalester.modules.find.find");        
         modMap.put("menu","edu.macalester.modules.menu.menu");
-        modMap.put("lock","edu.macalester.modules.lock.lock");
-        modMap.put("alert","edu.macalester.modules.alert.alert");
         return modMap;
     }
 }
