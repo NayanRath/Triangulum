@@ -1,24 +1,14 @@
 package edu.macalester;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class Prefs extends Activity {
-   	private static final String OPT_LOCATION = "location";
-   	private static final boolean OPT_LOCATION_DEF = true;
-   	private static final String OPT_ALERT = "alert";
-   	private static final boolean OPT_ALERT_DEF = true;
-   	private static final String OPT_LOCK = "lock";
-   	private static final boolean OPT_LOCK_DEF = true;
    	
    	public static final String PREFS_NAME= "SharedPrefs";
    	public static final String PREFPASS= "PrefPass";

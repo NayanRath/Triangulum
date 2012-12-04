@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Loser</string>
-    <string name="settings_label">Settings</string>
-    <string name="settings_title">Loser Settings</string>
+    <string name="settings_label">Settings...</string>
+    <string name="settings_title">Loser settings</string>
     <string name="settings_shortcut">s</string>
+    <string name="passcode_lable">Passcode</string>
+    <string name="loc_lable">Location</string>
+    <string name="lock_lable">Lock</string>
+    <string name="find_lable">Find</string>
+    <string name="alert_lable">Alert</string>
+    <string name="loc_ins">Returns phone location to the phone sending the command</string>
+    <string name="lock_ins">Will lock the phone and text new password to the phone sending the command</string>
+    <string name="alert_ins">Will play music on the phone for 2.5 min </string>
+    <string name="find_ins">Returns the closest landmark to the phone</string>
+
 </resources>
