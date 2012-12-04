@@ -18,33 +18,38 @@ public class locationFetcher extends triangulumModule implements LocationListene
 
     private LocationManager lmgr;
 
-    public String getTxt(){
-//TODO: Emulate GPS
-//*
+    public Location getLoc(){
         lmgr = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);
 
         lmgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10*1000, 1000, this );
         lmgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,90*1000, 1000, this);
         Criteria crit=new Criteria();
         String best=lmgr.getBestProvider(crit, true);
-        String loctxt;
+        Location loc;
         if (best == null){
-            loctxt = "???";
+            loc = null;
         } else {
             try{
-                Location loc = lmgr.getLastKnownLocation(best);
+                loc = lmgr.getLastKnownLocation(best);
                 Double lat = loc.getLatitude();
                 Double lon = loc.getLongitude();
                 Double alt = loc.getAltitude();
-                loctxt= lat.toString()+", "+lon.toString();
             } catch (Exception e){
-                loctxt="unable to locate";
+                loc=null;
             }
-        }//*/
-        //String loctxt;
-        //loctxt="whoop whoop!";
+        }
+        return loc;
+    };
 
-
+    public String getTxt(){
+        Location loc = getLoc();
+        if (loc==null){
+            return "Could not locate :(";
+        }
+        Double lat = loc.getLatitude();
+        Double lon = loc.getLongitude();
+        Double alt = loc.getAltitude();
+        String loctxt=lat.toString()+", "+lon.toString();
         return loctxt;
     }
 

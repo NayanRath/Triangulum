@@ -1,5 +1,6 @@
 package edu.macalester.modules.find;
 
+import android.location.Location;
 import edu.macalester.modules.locationFetcher.locationFetcher;
 import edu.macalester.modules.triangulumModule;
 
@@ -21,8 +22,10 @@ public class find extends triangulumModule {
         try{
             locationFetcher locFetch= new locationFetcher();
             locFetch.setContext(context);
-            String loc=locFetch.getTxt();
-            URL whereurl = new URL("http://maps.google.com/maps/api/geocode/json?latlng="+loc+"&sensor=true");
+            Location loc=locFetch.getLoc();
+            Double lat = loc.getLatitude();
+            Double lon = loc.getLongitude();
+            URL whereurl = new URL("http://maps.google.com/maps/api/geocode/json?latlng="+lat.toString()+","+lon.toString()+"&sensor=true");
             BufferedReader in = new BufferedReader(new InputStreamReader(whereurl.openStream()));
             String line = in.readLine();
 
@@ -33,7 +36,7 @@ public class find extends triangulumModule {
                 }
             }
         } catch (Exception e){
-            out="error occured:(";
+            out="could not locate :(";
         }
         return out;
     }
