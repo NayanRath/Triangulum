@@ -80,7 +80,6 @@ public class TriangulumMain extends Service {
 
 
     public void onTxtStart(String[] txt, String frm){
-        Log.d("hello", "world");
     	setAllMods();
         List<String> modnames=new LinkedList<String>();
         for (String s : txt){
@@ -108,11 +107,13 @@ public class TriangulumMain extends Service {
     	settings = getSharedPreferences("SharedPrefs", 0);
     	List<String> enablers = new LinkedList<String>();
     	
-    	boolean bLocation = settings.getBoolean("location", true);
-        boolean bAlert = settings.getBoolean("alert", true);
-        boolean bLock = settings.getBoolean("lock", true);
+    	boolean bLocation = settings.getBoolean("PrefLocation", true);
+        boolean bFind = settings.getBoolean("PrefFind", true);
+    	boolean bAlert = settings.getBoolean("PrefAlert", true);
+        boolean bLock = settings.getBoolean("PrefLocck", true);
         
         if (bLocation) enablers.add("location");
+        if (bFind) enablers.add("find");
         if (bAlert) enablers.add("alert");
         if (bLock) enablers.add("lock");
     	allMods=getAllMods(enablers);
@@ -125,13 +126,15 @@ public class TriangulumMain extends Service {
         if (enablers.contains("location")) {
         	modMap.put("location","edu.macalester.modules.locationFetcher.locationFetcher");
         }
+        if (enablers.contains("find")) {
+            modMap.put("find","edu.macalester.modules.find.find");       
+        }
         if (enablers.contains("lock")) {
             modMap.put("lock","edu.macalester.modules.lock.lock");       
         }
-        if (enablers.contains("lock")) {
+        if (enablers.contains("alert")) {
             modMap.put("alert","edu.macalester.modules.alert.alert");       
         }
-        modMap.put("menu","edu.macalester.modules.find.find");        
         modMap.put("menu","edu.macalester.modules.menu.menu");
         return modMap;
     }

@@ -21,14 +21,16 @@ public class Prefs extends Activity {
    	private static final boolean OPT_LOCK_DEF = true;
    	
    	public static final String PREFS_NAME= "SharedPrefs";
-   	public static final String PREF_STRING= "PrefString";
-   	public static final String PREF_BOOL1= "PrefBool1";
-   	public static final String PREF_BOOL2= "PrefBool2";
-   	public static final String PREF_BOOL3= "PrefBool3";
+   	public static final String PREFPASS= "PrefPass";
+   	public static final String PREFLOCATION= "PrefLocation";
+   	public static final String PREFFIND= "PrefFind";
+   	public static final String PREFALERT= "PrefAlert";
+   	public static final String PREFLOCK= "PrefLock";
    	
    	private SharedPreferences mPrefs;
    	private EditText pCode;
    	private CheckBox pLocation;
+   	private CheckBox pFind;
    	private CheckBox pAlert;
    	private CheckBox pLock;
    	
@@ -41,6 +43,7 @@ public class Prefs extends Activity {
 		
 		pCode = (EditText)findViewById(R.id.passcode);
 		pLocation = (CheckBox)findViewById(R.id.location);
+		pFind = (CheckBox)findViewById(R.id.find);
 		pAlert = (CheckBox)findViewById(R.id.alert);
 		pLock = (CheckBox)findViewById(R.id.lock);
 		
@@ -48,10 +51,11 @@ public class Prefs extends Activity {
 	
 	@Override
 	protected void onResume() {
-		pCode.setText(mPrefs.getString(PREF_STRING, "qwertyuiop"));
-		pLocation.setChecked(mPrefs.getBoolean(PREF_BOOL1,  false));
-		pAlert.setChecked(mPrefs.getBoolean(PREF_BOOL2,  false));
-		pLock.setChecked(mPrefs.getBoolean(PREF_BOOL3,  false));
+		pCode.setText(mPrefs.getString(PREFPASS, "qwertyuiop"));
+		pLocation.setChecked(mPrefs.getBoolean(PREFLOCATION,  false));
+		pFind.setChecked(mPrefs.getBoolean(PREFFIND,  false));
+		pAlert.setChecked(mPrefs.getBoolean(PREFALERT,  false));
+		pLock.setChecked(mPrefs.getBoolean(PREFLOCK,  false));
 		super.onResume();
 
 	}
@@ -60,32 +64,15 @@ public class Prefs extends Activity {
 	@Override
 	protected void onPause() {
 		Editor e = mPrefs.edit();
-		e.putString(PREF_STRING, pCode.getText().toString());
-		e.putBoolean(PREF_BOOL1, pLocation.isChecked());
-		e.putBoolean(PREF_BOOL2, pAlert.isChecked());
-		e.putBoolean(PREF_BOOL3, pLock.isChecked());
+		e.putString(PREFPASS, pCode.getText().toString());
+		e.putBoolean(PREFLOCATION, pLocation.isChecked());
+		e.putBoolean(PREFFIND, pFind.isChecked());
+		e.putBoolean(PREFALERT, pAlert.isChecked());
+		e.putBoolean(PREFLOCK, pLock.isChecked());
 		e.commit();
 
 		Toast.makeText(this, "Settings Saved.", Toast.LENGTH_SHORT).show();
 		super.onPause();
-	}
-	
-	//Get the current value of the location option
-	public static boolean locationPref(Context context) {
-		return PreferenceManager.getDefaultSharedPreferences(context)
-				.getBoolean(OPT_LOCATION, OPT_LOCATION_DEF);
-	}
-	
-	//Get the current value of the alert option
-		public static boolean alertPref(Context context) {
-			return PreferenceManager.getDefaultSharedPreferences(context)
-					.getBoolean(OPT_ALERT, OPT_ALERT_DEF);
-		}
-		
-	//Get the current value of the lock option
-	public static boolean lockPref(Context context) {
-		return PreferenceManager.getDefaultSharedPreferences(context)
-				.getBoolean(OPT_LOCK, OPT_LOCK_DEF);
 	}
 	
 	
