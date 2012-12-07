@@ -1,28 +1,20 @@
 package edu.macalester;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.os.IBinder;
-import android.util.Log;
-import android.widget.Toast;
 import edu.macalester.modules.triangulumModule;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-
+//main class, takes care of the heavy lifting
 public class TriangulumMain extends Service {
     public static SharedPreferences settings;
-	private SharedPreferences sharedPreferences;
+	//private SharedPreferences sharedPreferences;
 
-   // public TextView view;
+    // public TextView view;
     public HashMap<String, String> allMods;
     IntentFilter intentFilter;
     private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
@@ -32,6 +24,7 @@ public class TriangulumMain extends Service {
         }
     };
 
+    //prevents binding
     @Override
     public IBinder onBind(final Intent intent) {
         return null;
@@ -47,6 +40,9 @@ public class TriangulumMain extends Service {
         intentFilter.addAction("SMS_RECEIVED_ACTION");
         registerReceiver(intentReceiver,intentFilter);
         setAllMods();
+        settings=getSharedPreferences("SharedPrefs",MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.commit();
     }
 
     public List<String> getAllModuleNames(){
@@ -103,15 +99,15 @@ public class TriangulumMain extends Service {
     }
 
     public void setAllMods(){
-    	Toast.makeText(this, "It was seen.", Toast.LENGTH_SHORT).show();
+    	//Toast.makeText(this, "It was seen.", Toast.LENGTH_SHORT).show();
     	settings = getSharedPreferences("SharedPrefs", 0);
     	List<String> enablers = new LinkedList<String>();
-    	
-    	boolean bLocation = settings.getBoolean("PrefLocation", true);
-        boolean bFind = settings.getBoolean("PrefFind", true);
-    	boolean bAlert = settings.getBoolean("PrefAlert", true);
-        boolean bLock = settings.getBoolean("PrefLocck", true);
-        
+
+    	boolean bLocation = settings.getBoolean(Prefs.PREFLOCATION, true);
+        boolean bFind = settings.getBoolean(Prefs.PREFFIND, true);
+    	boolean bAlert = settings.getBoolean(Prefs.PREFALERT, true);
+        boolean bLock = settings.getBoolean(Prefs.PREFLOCK, true);
+
         if (bLocation) enablers.add("location");
         if (bFind) enablers.add("find");
         if (bAlert) enablers.add("alert");
@@ -121,7 +117,6 @@ public class TriangulumMain extends Service {
     }
 
     public static HashMap<String, String> getAllMods(List<String> enablers){
-        //TODO: fetch from database?
         HashMap<String, String> modMap = new HashMap<String, String>();
         if (enablers.contains("location")) {
         	modMap.put("location","edu.macalester.modules.locationFetcher.locationFetcher");

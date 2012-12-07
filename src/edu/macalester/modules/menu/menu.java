@@ -1,7 +1,11 @@
 package edu.macalester.modules.menu;
 
-import edu.macalester.TriangulumMain;
+import android.content.SharedPreferences;
+import edu.macalester.Prefs;
 import edu.macalester.modules.triangulumModule;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,12 +17,22 @@ import edu.macalester.modules.triangulumModule;
 public class menu extends triangulumModule {
 
     public String getTxt(){
-        String txt="hello";
-        /*
-        for (String s : TriangulumMain.getAllMods().keySet()){
-            txt =txt + s + " ";
-        }
-        */
-        return txt;
+        String menu="Modules Enabled: ";
+        SharedPreferences settings = context.getSharedPreferences("SharedPrefs", 0);
+    	List<String> enablers = new LinkedList<String>();
+
+    	boolean bLocation = settings.getBoolean(Prefs.PREFLOCATION, true);
+        boolean bFind = settings.getBoolean(Prefs.PREFFIND, true);
+    	boolean bAlert = settings.getBoolean(Prefs.PREFALERT, true);
+        boolean bLock = settings.getBoolean(Prefs.PREFLOCK, true);
+
+        if (bLocation) menu= menu+"location ";
+        if (bFind) menu=menu+"find ";
+        if (bAlert) menu=menu+"alert ";
+        if (bLock) menu=menu+"lock ";
+
+        menu = menu +"menu.";
+
+        return menu;
     }
 }

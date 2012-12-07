@@ -3,6 +3,7 @@ package edu.macalester;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
@@ -17,14 +18,22 @@ import java.util.Arrays;
  */
 public class textParser extends BroadcastReceiver {
 
-    public String activationCode = "qwertyuiop";
-    public TriangulumMain tMain;
+    //public String activationCode = "qwertyuiop";
+    //public TriangulumMain tMain;
+    private Context context;
+
+
 
     public String getActivationCode(){
-        return activationCode;
+        SharedPreferences settings = context.getSharedPreferences(Prefs.PREFS_NAME,Context.MODE_PRIVATE);
+        String pass = settings.getString(Prefs.PREFPASS,Prefs.PREFSPASSDEF);
+        return pass;
+        //return "asdf";
     }
 
-    public void onReceive(Context context, Intent intent) {
+    //runs on incoming texts
+    public void onReceive(Context con, Intent intent) {
+        context =con;
         Bundle bun = intent.getExtras();
         SmsMessage[] msgs;
         //String frm;
@@ -41,8 +50,6 @@ public class textParser extends BroadcastReceiver {
                     //tMain = new TriangulumMain();
 
                     //tMain.onTxtStart(c, frm);
-
-
                     Intent broadcastIntent = new Intent();
                     broadcastIntent.setAction("SMS_RECEIVED_ACTION");
                     broadcastIntent.putExtra("txtWords",c);
@@ -64,5 +71,4 @@ public class textParser extends BroadcastReceiver {
         }
         return null;
     }
-
 }

@@ -12,6 +12,7 @@ public class Prefs extends Activity {
    	
    	public static final String PREFS_NAME= "SharedPrefs";
    	public static final String PREFPASS= "PrefPass";
+    public static final String PREFSPASSDEF= "qwertyuiop";
    	public static final String PREFLOCATION= "PrefLocation";
    	public static final String PREFFIND= "PrefFind";
    	public static final String PREFALERT= "PrefAlert";
@@ -29,7 +30,7 @@ public class Prefs extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		mPrefs = getSharedPreferences(PREFS_NAME, 0);
+		mPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 		
 		pCode = (EditText)findViewById(R.id.passcode);
 		pLocation = (CheckBox)findViewById(R.id.location);
@@ -41,11 +42,11 @@ public class Prefs extends Activity {
 	
 	@Override
 	protected void onResume() {
-		pCode.setText(mPrefs.getString(PREFPASS, "qwertyuiop"));
-		pLocation.setChecked(mPrefs.getBoolean(PREFLOCATION,  false));
-		pFind.setChecked(mPrefs.getBoolean(PREFFIND,  false));
-		pAlert.setChecked(mPrefs.getBoolean(PREFALERT,  false));
-		pLock.setChecked(mPrefs.getBoolean(PREFLOCK,  false));
+		pCode.setText(mPrefs.getString(PREFPASS, PREFSPASSDEF));
+		pLocation.setChecked(mPrefs.getBoolean(PREFLOCATION,  true));
+		pFind.setChecked(mPrefs.getBoolean(PREFFIND,  true));
+		pAlert.setChecked(mPrefs.getBoolean(PREFALERT,  true));
+		pLock.setChecked(mPrefs.getBoolean(PREFLOCK,  true));
 		super.onResume();
 
 	}
@@ -64,6 +65,4 @@ public class Prefs extends Activity {
 		Toast.makeText(this, "Settings Saved.", Toast.LENGTH_SHORT).show();
 		super.onPause();
 	}
-	
-	
 }

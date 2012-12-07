@@ -11,6 +11,8 @@ import android.content.Intent;
  * Time: 2:03 PM
  * To change this template use File | Settings | File Templates.
  */
+
+//recieves BOOT_COMPLETED broadcast and starts app at bootup
 public class bootLauncher extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Intent mServiceIntent = new Intent();

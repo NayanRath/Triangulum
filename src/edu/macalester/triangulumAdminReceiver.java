@@ -11,6 +11,8 @@ import android.content.Intent;
  * Time: 2:24 PM
  * To change this template use File | Settings | File Templates.
  */
+
+//stub class to receive admin rights
 public class triangulumAdminReceiver extends DeviceAdminReceiver {
     public void onReceive(Context context, Intent intent) {
 
