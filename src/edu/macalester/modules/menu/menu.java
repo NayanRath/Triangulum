@@ -31,7 +31,10 @@ public class menu extends triangulumModule {
         if (bAlert) menu=menu+"alert ";
         if (bLock) menu=menu+"lock ";
 
-        menu = menu +"menu.";
+        //menu = menu +"menu.";
+        if (menu.equals("Modules Enabled: ")){
+            menu = menu +"NONE.";
+        }
 
         return menu;
     }
