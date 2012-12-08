@@ -33,7 +33,7 @@ public class menu extends triangulumModule {
 
         //menu = menu +"menu.";
         if (menu.equals("Modules Enabled: ")){
-            menu = menu +"NONE.";
+            menu = "You don't have any modules enabled.";
         }
 
         return menu;
