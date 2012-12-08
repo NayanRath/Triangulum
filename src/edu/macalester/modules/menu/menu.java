@@ -17,7 +17,7 @@ import java.util.List;
 public class menu extends triangulumModule {
 
     public String getTxt(){
-        String menu="Modules Enabled: ";
+        String menu="You have these commands enabled: ";
         SharedPreferences settings = context.getSharedPreferences("SharedPrefs", 0);
     	List<String> enablers = new LinkedList<String>();
 
@@ -29,11 +29,11 @@ public class menu extends triangulumModule {
         if (bLocation) menu= menu+"location ";
         if (bFind) menu=menu+"find ";
         if (bAlert) menu=menu+"alert ";
-        if (bLock) menu=menu+"lock ";
+        if (bLock) menu=menu+"lock";
 
         //menu = menu +"menu.";
-        if (menu.equals("Modules Enabled: ")){
-            menu = "You don't have any modules enabled.";
+        if (menu.equals("You have these commands enabled: ")){
+            menu = "You don't have any commands enabled.";
         }
 
         return menu;
