@@ -31,6 +31,9 @@ public class find extends triangulumModule {
             locationFetcher locFetch= new locationFetcher();
             locFetch.setContext(context);
             Location loc=locFetch.getLoc();
+            if (loc == null){
+                return "Could not Locate";
+            }
             Double lat = loc.getLatitude();
             Double lon = loc.getLongitude();
             String whereurl ="http://maps.google.com/maps/api/geocode/json?latlng="+lat.toString()+","+lon.toString()+"&sensor=true";
@@ -44,19 +47,16 @@ public class find extends triangulumModule {
             JSONObject jArray = null;
 
             //http post
-            try{
+
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost(whereurl);
+                HttpPost httppost = new HttpPost(whereurl);5
                 HttpResponse response = httpclient.execute(httppost);
                 HttpEntity entity = response.getEntity();
                 is = entity.getContent();
 
-            }catch(Exception e){
-                Log.e("log_tag", "Error in http connection "+e.toString());
-            }
 
             //convert response to string
-            try{
+
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
                 StringBuilder sb = new StringBuilder();
                 String line = null;
@@ -65,17 +65,13 @@ public class find extends triangulumModule {
                 }
                 is.close();
                 result=sb.toString();
-            }catch(Exception e){
-                Log.e("log_tag", "Error converting result " + e.toString());
-            }
-            //try parse the string to a JSON object
-            try{
-                jArray = new JSONObject(result);
-            }catch(JSONException e){
-                Log.e("log_tag", "Error parsing data "+e.toString());
-            }
 
-            out = jArray.getJSONObject("results").getString("formatted_address");
+                jArray = new JSONObject(result);
+
+
+            JSONObject results = jArray.getJSONObject("results");
+            //out = jArray.getJSONObject("results").getString("formatted_address");
+            out ="whoop";
 
         } catch (Exception e){
             out="could not locate :(";
