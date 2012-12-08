@@ -8,16 +8,15 @@ import android.os.Bundle;
 import edu.macalester.modules.triangulumModule;
 
 /**
- * Created with IntelliJ IDEA.
- * User: aaron
- * Date: 10/18/12
- * Time: 1:15 PM
- * To change this template use File | Settings | File Templates.
+ * Extends the module class to create a location class.
+ * This module will return the coordinates of the phone in a text message.
  */
 public class locationFetcher extends triangulumModule implements LocationListener {
 
     private LocationManager lmgr;
-
+    /**
+     * Gets the phone's location using the LocationManager system service.
+     */
     public Location getLoc(){
         lmgr = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);
 
@@ -40,7 +39,10 @@ public class locationFetcher extends triangulumModule implements LocationListene
         }
         return loc;
     };
-
+    /**
+     * Gets the location coordinates from getLoc() and constructs a string
+     * in the format of LAT, LONG. Returns the string.
+     */
     public String getTxt(){
         Location loc = getLoc();
         if (loc==null){
@@ -52,11 +54,15 @@ public class locationFetcher extends triangulumModule implements LocationListene
         String loctxt=lat.toString()+", "+lon.toString();
         return loctxt;
     }
-
+    
+    /**
+     * Removes any updates that may occur if location is changed while process
+     * is running.
+     */
     public void remUps(){
         lmgr.removeUpdates(this);
     }
-
+    
     public void onProviderEnabled(String s){}
     public void onProviderDisabled(String s){}
     public void onStatusChanged(String s, int i, Bundle b){}

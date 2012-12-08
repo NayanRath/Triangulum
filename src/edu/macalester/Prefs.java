@@ -7,9 +7,14 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
+/**
+ * This class takes care of reading, writing, and saving preferences.
+ * These preferences enable and disable modules, as well as sets the activation passcode.
+ */
 public class Prefs extends Activity {
-   	
+   	/**
+   	 * Names of preference keys that will be stored in Shared Preferences
+   	 */
    	public static final String PREFS_NAME= "SharedPrefs";
    	public static final String PREFPASS= "PrefPass";
     public static final String PREFSPASSDEF= "qwertyuiop";
@@ -26,6 +31,9 @@ public class Prefs extends Activity {
    	private CheckBox pLock;
    	
 	@Override
+	/**
+	 * Displays the preference layout when app starts up
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
@@ -41,6 +49,10 @@ public class Prefs extends Activity {
 	}
 	
 	@Override
+	/**
+	 * When the app is opened again, sets the preference views to 
+	 * what the values are stored as in the sharedPreferences database
+	 */
 	protected void onResume() {
 		pCode.setText(mPrefs.getString(PREFPASS, PREFSPASSDEF));
 		pLocation.setChecked(mPrefs.getBoolean(PREFLOCATION,  true));
@@ -53,6 +65,9 @@ public class Prefs extends Activity {
 	
 	
 	@Override
+	/**
+	 * Stores the selected preferences when user exits the app
+	 */
 	protected void onPause() {
 		Editor e = mPrefs.edit();
 		e.putString(PREFPASS, pCode.getText().toString());

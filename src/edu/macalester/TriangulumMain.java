@@ -8,15 +8,22 @@ import edu.macalester.modules.triangulumModule;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
-//main class, takes care of the heavy lifting
+/**
+ * This is the main class that takes care of most of the heavy lifting.
+ * It is a service rather than an activity, allowing it to run in the background
+ * and while phone is asleep.
+ */
 public class TriangulumMain extends Service {
-    public static SharedPreferences settings;
-	//private SharedPreferences sharedPreferences;
-
-    // public TextView view;
+    
+	public static SharedPreferences settings;
     public HashMap<String, String> allMods;
     IntentFilter intentFilter;
+    
+    /**
+     * This is the main class that takes care of most of the heavy lifting.
+     * It is a service rather than an activity, allowing it to run in the background
+     * and while phone is asleep.
+     */
     private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -24,8 +31,10 @@ public class TriangulumMain extends Service {
         }
     };
 
-    //prevents binding
     @Override
+    /**
+     * Prevents binding
+     */
     public IBinder onBind(final Intent intent) {
         return null;
     }
@@ -45,6 +54,9 @@ public class TriangulumMain extends Service {
         editor.commit();
     }
 
+    /**
+     * Creates a list of all available modules
+     */
     public List<String> getAllModuleNames(){
         List<String> mods=new LinkedList<String>();
         for(String val : allMods.keySet()){
@@ -53,6 +65,9 @@ public class TriangulumMain extends Service {
         return mods;
     }
 
+    /**
+     * Activates the modules that are available
+     */
     public List<String[]> runModules(List<String> modnames){
         String txt;
         List<String[]> out= new LinkedList<String[]>();
@@ -69,12 +84,18 @@ public class TriangulumMain extends Service {
         return out;
     }
 
+    /**
+     * Sends a response text based on the commands of the user
+     */
     public void sendTxt(String dest, List<String[]> txtData){
         textSender tSend = new textSender();
         tSend.sendTxt(txtData,dest);
     }
 
-
+    /**
+     * Gets incoming parsed text and the number of 
+     * who it's from.
+     */
     public void onTxtStart(String[] txt, String frm){
     	setAllMods();
         List<String> modnames=new LinkedList<String>();
@@ -97,7 +118,10 @@ public class TriangulumMain extends Service {
             ts = null;
         }
     }
-
+    /**
+     * Checks preferences to see which modules are enabled. Sends a list of
+     * enabled modules to getAllMods.
+     */
     public void setAllMods(){
     	//Toast.makeText(this, "It was seen.", Toast.LENGTH_SHORT).show();
     	settings = getSharedPreferences("SharedPrefs", 0);
@@ -115,7 +139,12 @@ public class TriangulumMain extends Service {
     	allMods=getAllMods(enablers);
 
     }
-
+    /**
+     * Takes list of enabled mods as parameter from setAllMods
+     * and activates the module classes for each one by putting
+     * the module name in a HashMap with the module name as a key and
+     * the class name as the value.
+     */
     public static HashMap<String, String> getAllMods(List<String> enablers){
         HashMap<String, String> modMap = new HashMap<String, String>();
         if (enablers.contains("location")) {

@@ -8,21 +8,23 @@ import edu.macalester.triangulumAdminReceiver;
 
 import java.util.Date;
 import java.util.Random;
-
+/**
+ * Extends the module class to create a lock class.
+ * This module will lock the phone and add a new passcode which is texted back to the user.
+ */
 public class lock extends triangulumModule {
     private DevicePolicyManager manager;
     ComponentName devAdm;
     String newPass;
-	public String getTxt(){
-        //PowerManager manager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-		//manager.goToSleep(0);
-		//String txt = "success, but you can't see this cause the phone is locked";
-
-        //DevicePolicyManager manager = new DevicePolicyManager();
+    
+    /**
+     * Locks phone, creates a new random lock code from characters
+     * in validCharacters, and returns a text string indicating the phone is
+     * locked, along with the passcode needed to unlock it.
+     */
+    public String getTxt(){
         manager=(DevicePolicyManager)context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         devAdm = new ComponentName(context, triangulumAdminReceiver.class);
-        //DeviceAdminReceiver adRec = new DeviceAdminReceiver();
-        //manager.resetPassword(,0);
 
         Character[] validCharacters = {'q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z',
                 'x','c','v','b','n','m','Q','W','E','R','T','Y','U','I','O','P','A','S','D','F','G','H','J','K','L','Z',
@@ -35,15 +37,11 @@ public class lock extends triangulumModule {
 
         ///Note: uncomment the following line for hardcoded newPass
         newPass="asdf";
+        
         String txt;
         if (manager.isAdminActive(devAdm)){
             manager.resetPassword(newPass, 0);
             manager.lockNow();
-
-/*        KeyguardManager mgr = (KeyguardManager)context.getSystemService(context.KEYGUARD_SERVICE);
-        KeyguardManager.KeyguardLock lock = mgr.newKeyguardLock(Context.KEYGUARD_SERVICE);
-        lock.disableKeyguard();
-        lock.reenableKeyguard();*/
 
         txt = "Device Locked: "+newPass;
         } else {
