@@ -8,14 +8,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: aaron
- * Date: 11/4/12
- * Time: 7:18 PM
- * To change this template use File | Settings | File Templates.
+ * Creates a list of available commands that the user can send to the phone.
  */
 public class menu extends triangulumModule {
-
+	/**
+	 * Looks at enabled modules in preferences and for each module, if it's enabled,
+	 * adds it to a string that will be texted back to the user to let them know which
+	 * commands are available.
+	 */
     public String getTxt(){
         String menu="You have these commands enabled: ";
         SharedPreferences settings = context.getSharedPreferences("SharedPrefs", 0);
@@ -30,8 +30,6 @@ public class menu extends triangulumModule {
         if (bFind) menu=menu+"find ";
         if (bAlert) menu=menu+"alert ";
         if (bLock) menu=menu+"lock";
-
-        //menu = menu +"menu.";
         if (menu.equals("You have these commands enabled: ")){
             menu = "You don't have any commands enabled.";
         }

@@ -9,12 +9,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/passcode_lable"
-        android:textStyle="bold" />
-
+        android:textStyle="bold"
+        android:textSize="10pt" />
+    
     <EditText
         android:id="@+id/passcode"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:inputType="text" />
 
     <CheckBox
@@ -22,7 +24,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/loc_lable"
-        android:textSize="10pt" />
+        android:textStyle="bold"        
+        android:textSize="14pt" />
 
 
     <TextView
@@ -30,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loc_ins"
-        android:textSize="5pt"  />
+        android:textSize="7pt"  />
 
 
     <CheckBox
@@ -38,36 +41,46 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/find_lable"
-        android:textSize="10pt" />
+        android:textStyle="bold"        
+        android:textSize="14pt" />
 <TextView
         android:id="@+id/find_ins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/find_ins"
-        android:textSize="5pt"  />
+        android:textSize="7pt"  />
     <CheckBox
         android:id="@+id/alert"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/alert_lable"
-        android:textSize="10pt" />
+        android:textStyle="bold"
+        android:textSize="14pt" />
 <TextView
         android:id="@+id/alert_ins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/alert_ins"
-        android:textSize="5pt"  />
+        android:textSize="7pt"  />
     <CheckBox
         android:id="@+id/lock"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/lock_lable"
-        android:textSize="10pt" />
+        android:textStyle="bold"
+        android:textSize="14pt" />
     <TextView
         android:id="@+id/lock_ins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lock_ins"
-        android:textSize="5pt"  />
+        android:textSize="7pt"  />
+    <TextView
+        android:id="@+id/loc_ins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/instructions"
+        android:textStyle="bold"
+        android:textSize="7pt"  />
 
 </LinearLayout>

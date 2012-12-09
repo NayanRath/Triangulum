@@ -14,5 +14,6 @@
     <string name="lock_ins">Will lock the phone and text new password to the phone sending the command</string>
     <string name="alert_ins">Will play music on the phone for 2.5 min </string>
     <string name="find_ins">Returns the closest landmark to the phone</string>
+    <string name="instructions">To enable the Lock module, go to the Settings App-> Security-> Device Administrators-> Sselect the checkbox next to "Loser". </string>    
 
 </resources>

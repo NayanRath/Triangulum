@@ -5,18 +5,17 @@ import android.telephony.SmsManager;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: aaron
- * Date: 10/30/12
- * Time: 1:42 PM
- * To change this template use File | Settings | File Templates.
+ * Contains methods for constructing a text message to be
+ * returned to the user after they send a command.
+ * Also responsible for sending the text message.
  */
-/*
- * this is a comment to test if Mike can commit
-*/
 public class textSender {
 
-
+	/**
+	 * Makes a new text string and adds strings passed to it in a list
+	 * 
+	 * @return the constructed string for the message
+	 */
     public String mkTxt(List<String[]> modTxt){
         String msg = "";
         for (String[] i : modTxt){
@@ -24,13 +23,20 @@ public class textSender {
         }
         return msg;
     }
-
+	/**
+	 * Sends a return SMS message containing response messages
+	 * if there are multiple messages
+	 */
     public void sendTxt(List<String[]> modTxt, String destNumber){
         String msg = mkTxt(modTxt);
         SmsManager smsMan = SmsManager.getDefault();
         smsMan.sendTextMessage(destNumber,null,msg,null,null);
     }
-
+    
+	/**
+	 * Sends a return SMS message containing a response message
+	 * if there is only one message.
+	 */
     public void sendTxt(String msg, String dest){
         SmsManager smsMan = SmsManager.getDefault();
         smsMan.sendTextMessage(dest,null,msg,null,null);

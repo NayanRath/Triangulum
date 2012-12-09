@@ -10,11 +10,9 @@ import android.telephony.SmsMessage;
 import java.util.Arrays;
 
 /**
- * Created with IntelliJ IDEA.
- * User: aaron
- * Date: 11/1/12
- * Time: 1:56 PM
- * To change this template use File | Settings | File Templates.
+ * Class responsible for listening to incoming texts
+ * and parses the text if it is a command for the app.
+ * 
  */
 public class textParser extends BroadcastReceiver {
 
@@ -23,7 +21,10 @@ public class textParser extends BroadcastReceiver {
     private Context context;
 
 
-
+    /**
+     * Gets the activation passcode from the user preferences
+     * @return activation passcode
+     */
     public String getActivationCode(){
         SharedPreferences settings = context.getSharedPreferences(Prefs.PREFS_NAME,Context.MODE_PRIVATE);
         String pass = settings.getString(Prefs.PREFPASS,Prefs.PREFSPASSDEF);
@@ -31,7 +32,14 @@ public class textParser extends BroadcastReceiver {
         //return "asdf";
     }
 
-    //runs on incoming texts
+    /**
+     * Listens for incoming texts, takes the text message and splits
+     * it on spaces, and passes it on to testAndSplitString to
+     * see if first word is the correct passcode. If it is, testAndSplitString
+     * returns an array of module commands after the passcode and onReceive sends 
+     * the module array through a broadcast intent which is picked up by
+     * TriangulumMain.
+     */    
     public void onReceive(Context con, Intent intent) {
         context =con;
         Bundle bun = intent.getExtras();
@@ -62,7 +70,13 @@ public class textParser extends BroadcastReceiver {
             }
         }
     }
-
+    /**
+     * Takes SMS message string and checks to see if first word
+     * is the passcode set by the user in preferences. If it matches
+     * it returns an array of modules sent by user.
+     * @param c
+     * @return
+     */
     public String[] testAndSplitString(String c){
         String s[] = c.split("\\s+");
         //return s;
