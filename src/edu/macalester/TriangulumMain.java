@@ -109,12 +109,12 @@ public class TriangulumMain extends Service {
         }
 
         List<String[]> txts = runModules(modnames);
-        String t= txts.get(0)[1];
+        //String t= txts.get(0)[1];
 
 //        view.setText(t);
         if (!frm.isEmpty()){
             textSender ts = new textSender();
-            ts.sendTxt(t,frm);
+            ts.sendTxt(txts,frm);
             ts = null;
         }
     }
