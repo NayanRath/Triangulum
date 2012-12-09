@@ -36,7 +36,7 @@ public class lock extends triangulumModule {
         }
 
         ///Note: uncomment the following line for hardcoded newPass
-        newPass="asdf";
+        //newPass="asdf";
         
         String txt;
         if (manager.isAdminActive(devAdm)){
