@@ -19,7 +19,7 @@ public class textSender {
     public String mkTxt(List<String[]> modTxt){
         String msg = "";
         for (String[] i : modTxt){
-            msg=msg+i+"; ";
+            msg=msg+i[0]+": "+i[1]+"; ";
         }
         return msg;
     }
