@@ -34,6 +34,7 @@ public class find extends triangulumModule {
                     out=line.split(":")[1];
                     break;
                 }
+                line=in.readLine();
             }
         } catch (Exception e){
             out="could not locate :(";
